@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 #
 services:
-  server:
+  forgejo:
     image: codeberg.org/forgejo/forgejo:11
     container_name: forgejo
     env_file:
