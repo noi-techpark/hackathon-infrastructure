@@ -8,8 +8,6 @@ on:
 
 env:
   PROJECT_NAME: hackathon-forgejo
-  SERVER_PORT_GIT: 1011
-  SERVER_PORT_WEB: 1010
   SHARED_VOLUME: /opt/hackathon-forgejo
   RUN_UID: 0
   RUN_GID: 0
@@ -28,8 +26,8 @@ jobs:
       - name: Create .env file
         uses: noi-techpark/github-actions/env-file@v2
         env:
-          X_SERVER_PORT_WEB: ${{ env.SERVER_PORT_WEB }}
-          X_SERVER_PORT_GIT: ${{ env.SERVER_PORT_GIT }}
+          X_SERVER_PORT_WEB: 1013
+          X_SERVER_PORT_GIT: 1014
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
 
       - name: Deploy application
