@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+services:
+  server:
+    image: codeberg.org/forgejo/forgejo:11
+    container_name: forgejo
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - forgejo
+    volumes:
+      - ${DATA_VOLUME}:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '${SERVER_PORT_WEB}:3000'
+      - '${SERVER_PORT_GIT}:22'
+
+networks:
+  forgejo:
+    external: false

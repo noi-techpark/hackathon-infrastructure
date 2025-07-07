@@ -1,0 +1,6 @@
+version = 1
+
+[[annotations]]
+path = "infrastructure/forgejo/**"
+SPDX-FileCopyrightText = "NOI Techpark"
+SPDX-License-Identifier = "CC0-1.0"

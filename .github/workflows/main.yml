@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: CI/CD Forgejo
+on:
+  push:
+
+env:
+  PROJECT_NAME: hackathon-forgejo
+  SERVER_PORT_GIT: 1011
+  SERVER_PORT_WEB: 1010
+  SHARED_VOLUME: /opt/hackathon-forgejo
+  RUN_UID: 0
+  RUN_GID: 0
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    concurrency: 
+      group: deploy-test
+      cancel-in-progress: true
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Create .env file
+        uses: noi-techpark/github-actions/env-file@v2
+        env:
+          X_SERVER_PORT_WEB: ${{ env.SERVER_PORT_WEB }}
+          X_SERVER_PORT_GIT: ${{ env.SERVER_PORT_GIT }}
+          X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
+
+      - name: Deploy application
+        uses: noi-techpark/github-actions/docker-deploy@v2
+        with:
+          hosts: 'test'
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          docker-username: 'noi-techpark-bot'
+          docker-password: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          project-name: ${{ env.PROJECT_NAME }}
+          
