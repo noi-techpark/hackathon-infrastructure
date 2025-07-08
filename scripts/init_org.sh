@@ -16,20 +16,21 @@ function api {
         -d "$2"
 }
 
+# create org
 org='{
-    "username": "hackathon",
+    "username": "2025-summer",
     "full_name": "NOI Hackathon 2025 summer edition",
     "description": "Aug 1st-2nd, 2025",
     "location": "Lido Schenna",
-    "website": "http://hackathon.bz.it",
+    "website": "https://hackathon.bz.it",
     "visibility": "public",
     "repo_admin_change_team_access": false
 }'
 
-api /admin/users/hackathon/orgs -d $org
+api admin/users/hackathon/orgs "$org"
 
-# Generate JSON
-body=$(jq -n --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")" \
+#create users
+usr=$(jq -n --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")" \
       --arg email "test2@domain.com" \
       --arg full_name "Test User" \
       --arg password "passwordsupersecret" \
@@ -47,7 +48,4 @@ body=$(jq -n --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")" \
   "visibility": "private"
 }')
 
-echo $body
-
-api admin/users "$body"
-
+api admin/users "$usr"
