@@ -8,7 +8,7 @@ HOST="http://172.17.0.1:3000"
 TOKEN=20ad9db1e6fd7205473fecfdd0d0ae76096c7155
 
 function api {
-    curl -X $1 \
+    curl --silent -X $1 \
         -H "Authorization: token $TOKEN" \
         -H 'accept: application/json' \
         -H 'Content-Type: application/json' \
@@ -17,8 +17,9 @@ function api {
 }
 
 # create org
+orgname=2025-summer
 org='{
-    "username": "2025-summer",
+    "username": "'"$orgname"'",
     "full_name": "NOI Hackathon 2025 summer edition",
     "description": "Aug 1st-2nd, 2025",
     "location": "Lido Schenna",
@@ -26,7 +27,6 @@ org='{
     "visibility": "public",
     "repo_admin_change_team_access": false
 }'
-
 api POST admin/users/hackathon/orgs "$org"
 
 #create users
@@ -48,7 +48,6 @@ usr=$(jq -n --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")" \
   "username": $username,
   "visibility": "private"
 }')
-
 api POST admin/users "$usr"
 
 #create team
@@ -74,15 +73,28 @@ team=$(jq -n \
     "repo.ext_wiki"
   ]
 }')
-
-teamjson=$(api POST orgs/2025-summer/teams "$team")
+teamjson=$(api POST orgs/$orgname/teams "$team")
 teamid=$(echo $teamjson | jq '.id')
+if [ "$teamid" = "null" ]; then
+    teamid=$(api GET 'orgs/2025-summer/teams/search?q=team1' | jq '.data[0].id')
+    echo fallback to searched teamid. hope it matches: $teamid
+fi
 
 # add user to team
 api PUT teams/$teamid/members/$username
 
 # create team repo
+reponame=testrepo
+repo='{
+  "auto_init": true,
+  "license": "AGPL-3.0-or-later",
+  "name": "'"$reponame"'",
+  "private": true,
+  "template": false
+}'
+api POST orgs/$orgname/repos "$repo"
 
 # give repo access to team
+api PUT teams/$teamid/repos/$orgname/$reponame
 
 
