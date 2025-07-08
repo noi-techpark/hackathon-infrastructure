@@ -30,6 +30,55 @@ jobs:
           X_SERVER_PORT_GIT: 1014
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
 
+          
+          # See configuration options: https://forgejo.org/docs/latest/admin/config-cheat-sheet/
+          # See env variable format: https://codeberg.org/forgejo/forgejo/src/branch/forgejo/contrib/environment-to-ini
+          X_FORGEJO____APP_NAME: Hackathon
+          X_FORGEJO____APP_SLOGAN: ""
+
+          X_FORGEJO__server__DOMAIN: repos.hackathon.testingmachine.eu
+          X_FORGEJO__server__SSH_DOMAIN: ssh.repos.hackathon.testingmachine.eu
+          X_FORGEJO__server__HTTP_PORT: 3000
+          X_FORGEJO__server__ROOT_URL: https://repos.hackathon.testingmachine.eu/
+          X_FORGEJO__server__SSH_PORT: 222
+
+          X_FORGEJO__log__LEVEL: info
+
+          X_FORGEJO__repository__DISABLED_REPO_UNITS: "repo.ext_issues,repo.wiki,repo.ext_wiki,repo.packages,repo.actions"
+          X_FORGEJO__repository__DISABLE_STARS: true
+          X_FORGEJO__repository__DISABLE_MIGRATIONS: true
+
+          X_FORGEJO__actions__ENABLED: false
+
+          X_FORGEJO__ui__DEFAULT_THEME: gitea-auto
+          X_FORGEJO__ui__SHOW_USER_EMAIL: false
+
+          X_FORGEJO__service__DISABLE_REGISTRATION: true
+          X_FORGEJO__service__DEFAULT_KEEP_EMAIL_PRIVATE: true
+          X_FORGEJO__service__DEFAULT_ALLOW_CREATE_ORGANIZATION: false
+          X_FORGEJO__service__DEFAULT_USER_VISIBILITY: limited
+          X_FORGEJO__service__DISABLE_USERS_PAGE: true
+          X_FORGEJO__service__SHOW_MILESTONES_DASHBOARD_PAGE: false
+          X_FORGEJO__service__ENABLE_USER_HEATMAP: false
+          X_FORGEJO__service__ENABLE_TIMETRACKING: false
+
+          X_FORGEJO__service_0X2E_explore__DISABLE_USERS_PAGE: true
+
+          X_FORGEJO__openid__ENABLE_OPENID_SIGNIN: false
+          X_FORGEJO__openid__ENABLE_OPENID_SIGNUP: false
+
+          X_FORGEJO__admin__DISABLE_REGULAR_ORG_CREATION: true
+          X_FORGEJO__admin__USER_DISABLED_FEATURES: deletion
+
+          X_FORGEJO__security__INSTALL_LOCK: true
+          X_FORGEJO__security__DISABLE_WEBHOOKS: true
+
+          X_FORGEJO__packages__ENABLED: false
+
+          X_FORGEJO__other__ENABLE_FEED: false
+          X_FORGEJO__other__SHOW_FOOTER_VERSION: false
+          X_FORGEJO__other__SHOW_FOOTER_TEMPLATE_LOAD_TIME: false
+
       - name: Deploy application
         uses: noi-techpark/github-actions/docker-deploy@v2
         with:
