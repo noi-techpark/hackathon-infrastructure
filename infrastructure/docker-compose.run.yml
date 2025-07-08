@@ -16,8 +16,8 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - '${SERVER_PORT_WEB}:3000'
-      - '${SERVER_PORT_GIT}:22'
+      - '${SERVER_PORT_WEB}:${SERVER_PORT_WEB}'
+      - '${SERVER_PORT_GIT}:${SERVER_PORT_GIT}'
 
 networks:
   forgejo:
