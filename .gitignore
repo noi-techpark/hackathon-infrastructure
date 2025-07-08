@@ -7,6 +7,8 @@ infrastructure/forgejo/forgejo
 
 .env
 
+token
+
 # Local .terraform directories
 .terraform/
 
