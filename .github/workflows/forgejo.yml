@@ -70,7 +70,7 @@ jobs:
           X_FORGEJO__admin__DISABLE_REGULAR_ORG_CREATION: true
           X_FORGEJO__admin__USER_DISABLED_FEATURES: deletion
 
-          X_FORGEJO__security__INSTALL_LOCK: true
+          # X_FORGEJO__security__INSTALL_LOCK: true
           X_FORGEJO__security__DISABLE_WEBHOOKS: true
 
           X_FORGEJO__packages__ENABLED: false
