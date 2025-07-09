@@ -4,8 +4,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-HOST="http://localhost:3000"
-TOKEN=****
+HOST="https://repos.hackathon.testingmachine.eu"
+TOKEN=83050f910da4fa64290273feeaa7b41948421aff
 
 function api {
     curl --silent -X $1 \
@@ -17,7 +17,7 @@ function api {
 }
 
 # create org
-orgname=test-org-1
+orgname=test-org-2
 org='{
     "username": "'"$orgname"'",
     "full_name": "NOI Hackathon 2025 summer edition",
