@@ -50,7 +50,8 @@ jobs:
 
           X_FORGEJO__actions__ENABLED: false
 
-          X_FORGEJO__ui__DEFAULT_THEME: gitea-auto
+          X_FORGEJO__ui__DEFAULT_THEME: gitea-light
+          X_FORGEJO__ui__THEMES: gitea-light,forgejo-light-deuteranopia-protanopia,forgejo-light-tritanopia
           X_FORGEJO__ui__SHOW_USER_EMAIL: false
 
           X_FORGEJO__service__DISABLE_REGISTRATION: true
