@@ -7,6 +7,25 @@ SPDX-License-Identifier: CC0-1.0
 # hackathon-infrastructure
 Infrastructure repo for all things hackathon.bz.it
 
+# Infrastructure
+## DNS
+create a CNAME and proxy entry
+## EC2
+- create a dedicated volume and attach it to the chosen docker instance.  
+## Volume
+- initialize the volume using [this guide](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html)  
+- mount volume to /mnt/forgejo
+## system user
+On the docker host:
+```bash
+# create a system user for forgejo
+useradd -r -M -s /bin/false forgejo
+# make this user own the mounted volume
+chown -R forgejo:forgejo /mnt/forgejo
+# get user and group id of the user. use this in config of forgejo
+echo "userid:groupid = $(id -u forgejo):$(id -g forgejo)"
+```
+
 # Forgejo
 ## run locally:
 ```bash

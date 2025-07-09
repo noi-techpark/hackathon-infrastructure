@@ -5,12 +5,13 @@
 name: CI/CD Forgejo
 on:
   push:
+    paths: 
+      - "infrastructure/*"
+      - ".github/workflows/forgejo.yml"
 
 env:
   PROJECT_NAME: hackathon-forgejo
-  SHARED_VOLUME: /opt/hackathon-forgejo
-  RUN_UID: 0
-  RUN_GID: 0
+  SHARED_VOLUME: /mnt/forgejo
 
 jobs:
   deploy-test:
@@ -28,7 +29,8 @@ jobs:
         env:
           X_SERVER_PORT_WEB: 1013
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
-
+          X_USER_UID: 997
+          X_USER_GID: 996
           
           # See configuration options: https://forgejo.org/docs/latest/admin/config-cheat-sheet/
           # See env variable format: https://codeberg.org/forgejo/forgejo/src/branch/forgejo/contrib/environment-to-ini
