@@ -6,7 +6,7 @@ name: CI/CD Forgejo
 on:
   push:
     paths: 
-      - "infrastructure/*"
+      - "infrastructure/**"
       - ".github/workflows/forgejo.yml"
 
 env:
