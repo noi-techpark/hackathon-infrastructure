@@ -13,3 +13,9 @@ path = ["infrastructure/forgejo/**", "infrastructure/ansible/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "(c) NOI Techpark <digital@noi.bz.it>"
 SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["custom/public/assets/img/*"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "(c) NOI Techpark <digital@noi.bz.it>"
+SPDX-License-Identifier = "CC0-1.0"

@@ -15,6 +15,8 @@ services:
       - ${DATA_VOLUME}:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - ./custom/public:/data/gitea/public:ro
+      - ./custom/templates:/data/gitea/templates:ro
     ports:
       - '${SERVER_PORT_WEB}:3000'
 

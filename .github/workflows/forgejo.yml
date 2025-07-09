@@ -11,7 +11,6 @@ on:
 
 env:
   PROJECT_NAME: hackathon-forgejo
-  SHARED_VOLUME: /mnt/forgejo
 
 jobs:
   deploy-test:
@@ -20,6 +19,10 @@ jobs:
     concurrency: 
       group: deploy-test
       cancel-in-progress: true
+    env:
+      USER_UID: 997
+      USER_GID: 996
+      SHARED_VOLUME: /mnt/forgejo
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -29,8 +32,8 @@ jobs:
         env:
           X_SERVER_PORT_WEB: 1013
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
-          X_USER_UID: 997
-          X_USER_GID: 996
+          X_USER_UID: ${{ env.USER_UID }}
+          X_USER_GID: ${{ env.USER_GID }}
           
           # See configuration options: https://forgejo.org/docs/latest/admin/config-cheat-sheet/
           # See env variable format: https://codeberg.org/forgejo/forgejo/src/branch/forgejo/contrib/environment-to-ini

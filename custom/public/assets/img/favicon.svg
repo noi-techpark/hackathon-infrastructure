@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:#9EDBF5;}
+	.st2{display:inline;fill:#101416;}
+	.st3{font-family:'KievitOT-Regular';}
+	.st4{font-size:11.7739px;}
+</style>
+<g id="Ebene_1">
+	<path d="M210.3,373.2l65.5,65.5h156.6V73.8H299.9v65.4l-65.4-65.4H80.4v364.9h129.9L210.3,373.2L210.3,373.2z M284.6,431.7
+		l94-102.3l45.1,102.3H284.6L284.6,431.7z M425.3,417.9l-41.7-94.6l41.7-212.6V417.9z M424.1,80.9l-45.2,230.9L307,146.3V80.9H424.1
+		L424.1,80.9z M303.4,155.8l72.2,166.4l-98.8,107.6l-65.2-65.2L303.4,155.8z M226.8,80.9l-93.3,151.2L89.1,80.9H226.8z M87.4,100.2
+		l41.3,140.4L87.4,406.5V100.2z M203.2,431.7H88.3l45.2-181.9l69.6,117.6L203.2,431.7L203.2,431.7z M136.4,240.6l97.3-157.8
+		l65.3,65.3l-92.6,210.8L136.4,240.6z"/>
+</g>
+<g id="Hilfskästchen" class="st0">
+	<rect x="385.8" y="15.1" class="st1" width="125.7" height="39.6"/>
+	<polygon class="st2" points="446.4,32.3 444.8,32.8 444.7,32.1 446.5,31.5 447.3,31.5 447.3,39.3 446.4,39.3 	"/>
+	<text transform="matrix(1 0 0 1 449.2493 39.3409)" class="st2 st3 st4"> </text>
+	<text transform="matrix(1 0 0 1 449.8997 39.3409)" class="st2 st3 st4">i</text>
+	<rect x="-586.3" y="16.7" class="st1" width="125.7" height="39.6"/>
+	<polygon class="st2" points="-525.7,34 -527.3,34.5 -527.5,33.7 -525.6,33.2 -524.9,33.2 -524.9,41 -525.7,41 	"/>
+	<text transform="matrix(1 0 0 1 -523.7054 40.9991)" class="st2 st3 st4"> </text>
+	<text transform="matrix(1 0 0 1 -522.2333 40.9991)" class="st2 st3 st4">i</text>
+	<rect x="11.8" y="-230.2" class="st1" width="39.6" height="125.7"/>
+	<polygon class="st2" points="29,-165.1 29.5,-163.6 28.8,-163.4 28.2,-165.2 28.2,-166 36,-166 36,-165.1 	"/>
+	<text transform="matrix(0 -1 1 0 36.015 -167.1307)" class="st2 st3 st4"> </text>
+	<text transform="matrix(0 -1 1 0 36.015 -168.6024)" class="st2 st3 st4">i</text>
+	<rect x="24.1" y="386.3" class="st1" width="39.6" height="125.7"/>
+	<polygon class="st2" points="41.3,451.4 41.8,452.9 41.1,453.1 40.5,451.2 40.5,450.5 48.3,450.5 48.3,451.4 	"/>
+	<text transform="matrix(0 -1 1 0 48.3312 449.3107)" class="st2 st3 st4"> </text>
+	<text transform="matrix(0 -1 1 0 48.3323 447.8439)" class="st2 st3 st4">i</text>
+	<rect x="-287.1" y="206.8" class="st1" width="57" height="41.9"/>
+	<path class="st2" d="M-265.9,225.2l-1.5,0.5l-0.2-0.7l1.9-0.6h0.7v7.8h-0.9V225.2z M-260.2,223.7h0.8l-3.7,10.4h-0.8L-260.2,223.7z
+		 M-258.7,232.2l0.1-0.8c0.1,0,0.5,0.1,1,0.1c1.4,0,2.2-0.6,2.2-1.7c0-1.2-1.1-1.6-2.5-1.6v-0.6c1.2,0,2.3-0.6,2.3-1.6
+		c0-0.6-0.5-1-1.3-1s-1.2,0.2-1.6,0.6l-0.4-0.6c0.4-0.4,1.1-0.8,2.1-0.8c1.4,0,2.1,0.8,2.1,1.8s-0.8,1.6-1.7,1.9l0,0
+		c1,0.1,2,0.9,2,2c0,1.6-1.3,2.5-3.1,2.5C-258.1,232.3-258.5,232.3-258.7,232.2z"/>
+	<text transform="matrix(1 0 0 1 -253.695 232.1983)" class="st2 st3 st4"> </text>
+	<text transform="matrix(1 0 0 1 -252.2228 232.1983)" class="st2 st3 st4">i</text>
+</g>
+</svg>
