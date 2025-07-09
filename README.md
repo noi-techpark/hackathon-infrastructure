@@ -12,6 +12,7 @@ Infrastructure repo for all things hackathon.bz.it
 create a CNAME and proxy entry
 ## EC2
 - create a dedicated volume and attach it to the chosen docker instance.  
+- Tag the volume for AWS backup with `AWSBackup=true`
 ## Volume
 - initialize the volume using [this guide](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html)  
 - mount volume to /mnt/forgejo
@@ -25,6 +26,10 @@ chown -R forgejo:forgejo /mnt/forgejo
 # get user and group id of the user. use this in config of forgejo
 echo "userid:groupid = $(id -u forgejo):$(id -g forgejo)"
 ```
+## volume backup schedule
+Create a EC2 LifecycleManager backup policy that runs hourly during the hackathon event:
+`cron(0 * 1,2 8 ? 2025)`
+with a retention of 1 day.
 
 # Forgejo
 ## run locally:
