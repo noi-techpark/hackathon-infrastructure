@@ -4,8 +4,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-HOST="http://172.17.0.1:3000"
-TOKEN=5c8bfe50db6c1f0be1a1223159ecd8faaaf5c55d
+HOST="http://localhost:3000"
+TOKEN=****
 
 function api {
     curl --silent -X $1 \
@@ -17,7 +17,7 @@ function api {
 }
 
 # create org
-orgname=2025-summer
+orgname=test-org-1
 org='{
     "username": "'"$orgname"'",
     "full_name": "NOI Hackathon 2025 summer edition",

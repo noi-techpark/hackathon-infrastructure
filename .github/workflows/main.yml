@@ -27,7 +27,6 @@ jobs:
         uses: noi-techpark/github-actions/env-file@v2
         env:
           X_SERVER_PORT_WEB: 1013
-          X_SERVER_PORT_GIT: 1014
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
 
           
@@ -37,11 +36,9 @@ jobs:
           X_FORGEJO____APP_SLOGAN: ""
 
           X_FORGEJO__server__DOMAIN: repos.hackathon.testingmachine.eu
-          X_FORGEJO__server__SSH_DOMAIN: ssh.repos.hackathon.testingmachine.eu
           X_FORGEJO__server__HTTP_PORT: 3000
           X_FORGEJO__server__ROOT_URL: https://repos.hackathon.testingmachine.eu/
-          X_FORGEJO__server__SSH_PORT: 1014
-          X_FORGEJO__server__SSH_LISTEN_PORT: 22
+          X_FORGEJO__server__DISABLE_SSH: true
 
           X_FORGEJO__log__LEVEL: info
 
