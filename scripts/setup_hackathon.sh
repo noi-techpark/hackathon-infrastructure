@@ -37,7 +37,7 @@ function api {
 }
 
 # create org
-orgname=2025-summer-t1
+orgname=$SCRIPT_ORGNAME
 org='{
     "username": "'"$orgname"'",
     "full_name": "NOI Hackathon 2025 summer edition",

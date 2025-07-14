@@ -54,12 +54,17 @@ docker exec --user git forgejo forgejo admin user create --admin --username hack
 
 # run hackathon setup script
 - create an API token with scope admin:read+write and organization:read+write
-- customize the `.env` values with prefix `SCRIPT_`. Pay special attention to the `DRYRUN` and `NOTIFY_USERS` variables. For production run, they should be false and true, respectively
+- customize the `.env` values with prefix `SCRIPT_`
 
 ```bash
 ./scripts/setup_hackathon.sh input.csv
 ```
 passing your input csv file in the same format as `input.example.csv`
 
-
 Only the team number, name and email columns are used
+
+# gong script
+At gong sound run this script to make all org repos public
+```bash
+./scripts/gong_open_repos.sh
+```
