@@ -4,15 +4,21 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-HOST="https://repos.hackathon.testingmachine.eu"
-TOKEN=83050f910da4fa64290273feeaa7b41948421aff
+rundir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source rundir/../.env
+
+apihost=$SCRIPT_HOST
+apitoken=$SCRIPT_TOKEN
+
+# notify new user with email
+notify=false
 
 function api {
     curl --silent -X $1 \
-        -H "Authorization: token $TOKEN" \
+        -H "Authorization: token $apitoken" \
         -H 'accept: application/json' \
         -H 'Content-Type: application/json' \
-        $HOST/api/v1/$2 \
+        $apihost/api/v1/$2 \
         -d "$3"
 }
 
@@ -82,6 +88,7 @@ for teamname in team1 team2 team3; do
               --arg full_name "Test User" \
               --arg password "passwordsupersecret" \
               --arg username "$username" \
+              --argjson notify $notify \
         '{
           "created_at": $created_at,
           "email": $email,
@@ -89,7 +96,7 @@ for teamname in team1 team2 team3; do
           "must_change_password": true,
           "password": $password,
           "restricted": false,
-          "send_notify": false,
+          "send_notify": $notify,
           "source_id": 0,
           "username": $username,
           "visibility": "private"

@@ -51,6 +51,8 @@ jobs:
           X_FORGEJO__repository__DISABLED_REPO_UNITS: "repo.ext_issues,repo.wiki,repo.ext_wiki,repo.packages,repo.actions"
           X_FORGEJO__repository__DISABLE_STARS: true
           X_FORGEJO__repository__DISABLE_MIGRATIONS: true
+          X_FORGEJO__repository__MAX_CREATION_LIMIT: 0
+          X_FORGEJO__repository__ALLOW_FORK_WITHOUT_MAXIMUM_LIMIT: false
 
           X_FORGEJO__actions__ENABLED: false
 
@@ -66,6 +68,7 @@ jobs:
           X_FORGEJO__service__SHOW_MILESTONES_DASHBOARD_PAGE: false
           X_FORGEJO__service__ENABLE_USER_HEATMAP: false
           X_FORGEJO__service__ENABLE_TIMETRACKING: false
+          X_FORGEJO__service__ENABLE_NOTIFY_MAIL: false
 
           X_FORGEJO__service_0X2E_explore__DISABLE_USERS_PAGE: true
 
@@ -74,6 +77,7 @@ jobs:
 
           X_FORGEJO__admin__DISABLE_REGULAR_ORG_CREATION: true
           X_FORGEJO__admin__USER_DISABLED_FEATURES: deletion
+          X_FORGEJO__admin__SEND_NOTIFICATION_EMAIL_ON_NEW_USER: false
 
           # X_FORGEJO__security__INSTALL_LOCK: true
           X_FORGEJO__security__DISABLE_WEBHOOKS: true
@@ -83,6 +87,15 @@ jobs:
           X_FORGEJO__other__ENABLE_FEED: false
           X_FORGEJO__other__SHOW_FOOTER_VERSION: false
           X_FORGEJO__other__SHOW_FOOTER_TEMPLATE_LOAD_TIME: false
+
+          X_FORGEJO__mailer__ENABLED: true
+          # X_FORGEJO__mailer__PROTOCOL: smtp+starttls
+          X_FORGEJO__mailer__PROTOCOL: dummy
+          X_FORGEJO__mailer__SMTP_ADDR: smtp.qbus.it
+          X_FORGEJO__mailer__SMTP_PORT: 587
+          X_FORGEJO__mailer__USER: info@hackathon.bz.it
+          X_FORGEJO__mailer__PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          X_FORGEJO__mailer__FROM: '"Hackathon repository" <info@hackathon.bz.it>'
 
       - name: Deploy application
         uses: noi-techpark/github-actions/docker-deploy@v2
