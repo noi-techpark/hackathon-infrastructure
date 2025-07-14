@@ -128,4 +128,24 @@ cat $inputcsv | tail -n +2 | while read line; do
     api PUT teams/$teamid/members/$username
 done
 
-
+# Create jury team
+juryteam='{
+  "can_create_org_repo": false,
+  "description": "Jury",
+  "includes_all_repositories": true,
+  "name": "Jury",
+  "permission": "read",
+  "units": [
+    "repo.actions",
+    "repo.code",
+    "repo.issues",
+    "repo.ext_issues",
+    "repo.wiki",
+    "repo.ext_wiki",
+    "repo.pulls",
+    "repo.releases",
+    "repo.projects",
+    "repo.ext_wiki"
+  ]
+}'
+api POST orgs/$orgname/teams "$juryteam"
