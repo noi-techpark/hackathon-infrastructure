@@ -95,7 +95,7 @@ jobs:
           X_FORGEJO__mailer__SMTP_PORT: 587
           X_FORGEJO__mailer__USER: info@hackathon.bz.it
           X_FORGEJO__mailer__PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          X_FORGEJO__mailer__FROM: '"Hackathon repository" <info@hackathon.bz.it>'
+          X_FORGEJO__mailer__FROM: info@hackathon.bz.it
 
       - name: Deploy application
         uses: noi-techpark/github-actions/docker-deploy@v2
