@@ -32,5 +32,5 @@ function api {
 repos=$(api GET orgs/$orgname/repos)
 for repo in $(echo $repos | jq -r '.[].name' | sed -z 's/\n/ /g'); do
     echo REPO repos/$orgname/$repo
-    api PATCH repos/$orgname/$repo '{"private": true}'
+    api PATCH repos/$orgname/$repo '{"private": false}'
 done
