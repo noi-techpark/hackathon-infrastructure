@@ -9,6 +9,8 @@ infrastructure/forgejo/forgejo
 
 token
 
+input.csv
+
 # Local .terraform directories
 .terraform/
 
