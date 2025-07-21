@@ -116,8 +116,7 @@ jobs:
     env:
       USER_UID: 997
       USER_GID: 996
-      # TODO: mount dedicated volume and change to /mnt/forgejo
-      SHARED_VOLUME: /opt/forgejo
+      SHARED_VOLUME: /mnt/forgejo
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
