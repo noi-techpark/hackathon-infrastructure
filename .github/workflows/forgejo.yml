@@ -182,8 +182,8 @@ jobs:
           X_FORGEJO__other__SHOW_FOOTER_TEMPLATE_LOAD_TIME: false
 
           X_FORGEJO__mailer__ENABLED: true
-          # X_FORGEJO__mailer__PROTOCOL: smtp+starttls
-          X_FORGEJO__mailer__PROTOCOL: dummy
+          X_FORGEJO__mailer__PROTOCOL: smtp+starttls
+          # X_FORGEJO__mailer__PROTOCOL: dummy
           X_FORGEJO__mailer__SMTP_ADDR: smtp.qbus.it
           X_FORGEJO__mailer__SMTP_PORT: 587
           X_FORGEJO__mailer__USER: info@hackathon.bz.it
