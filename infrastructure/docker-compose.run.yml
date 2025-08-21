@@ -29,7 +29,6 @@ services:
     environment:
       SERVE_ROBOTS_TXT: true
       TARGET: http://forgejo:3000
-      JWT_RESTRICTION_HEADER: 
     ports:
       - '${SERVER_PORT_WEB}:8923'
     healthcheck:
