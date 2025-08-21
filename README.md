@@ -35,8 +35,11 @@ with a retention of 1 day.
 ## run locally:
 ```bash
 cp .env.example .env
-docker compose --project-directory . -f infrastructure/docker-compose.run.yml up
+docker compose --profile dev --project-directory . -f infrastructure/docker-compose.run.yml up
 ```
+now you can access via http://localhost:8080 (assuming default $LOCAL_DEV_PORT)
+
+Note that since Anubis does now work without a proxy server, when testing locally you need to access via the included caddy, and not directly via the port `SERVER_PORT_WEB`
 
 The provided config file creates an admin user with credentials `hackathon:hackathon`
 

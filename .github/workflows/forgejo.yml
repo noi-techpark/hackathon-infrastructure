@@ -24,6 +24,7 @@ jobs:
       USER_UID: 997
       USER_GID: 996
       SHARED_VOLUME: /mnt/forgejo
+      DOMAIN_ROOT: hackathon.testingmachine.eu
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -32,6 +33,7 @@ jobs:
         uses: noi-techpark/github-actions/env-file@v2
         env:
           X_SERVER_PORT_WEB: 1013
+
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
           X_USER_UID: ${{ env.USER_UID }}
           X_USER_GID: ${{ env.USER_GID }}
@@ -41,9 +43,9 @@ jobs:
           X_FORGEJO____APP_NAME: Hackathon
           X_FORGEJO____APP_SLOGAN: ""
 
-          X_FORGEJO__server__DOMAIN: repos.hackathon.testingmachine.eu
+          X_FORGEJO__server__DOMAIN: repos.${{env.DOMAIN_ROOT}}
           X_FORGEJO__server__HTTP_PORT: 3000
-          X_FORGEJO__server__ROOT_URL: https://repos.hackathon.testingmachine.eu/
+          X_FORGEJO__server__ROOT_URL: https://repos.${{env.DOMAIN_ROOT}}/
           X_FORGEJO__server__DISABLE_SSH: true
 
           X_FORGEJO__log__LEVEL: info

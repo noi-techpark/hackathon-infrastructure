@@ -9,22 +9,41 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-    networks:
-      - forgejo
     volumes:
       - ${DATA_VOLUME}:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - ./custom/public/:/data/gitea/public/:ro
       - ./custom/templates/:/data/gitea/templates/:ro
-    ports:
-      - '${SERVER_PORT_WEB}:3000'
     deploy:
       resources:
         limits:
           cpus: '2.00'
           memory: '3G'
-
-networks:
-  forgejo:
-    external: false
+          
+  anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    container_name: anubis
+      # see here for config options
+      # https://github.com/TecharoHQ/anubis/blob/main/docs/docs/admin/installation.mdx
+    environment:
+      SERVE_ROBOTS_TXT: true
+      TARGET: http://forgejo:3000
+      JWT_RESTRICTION_HEADER: 
+    ports:
+      - '${SERVER_PORT_WEB}:8923'
+    healthcheck:
+      test: ["CMD", "anubis", "--healthcheck"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 500ms
+      
+  caddy:
+    profiles:
+      - dev
+    image: caddy:2
+    ports:
+      - ${LOCAL_DEV_PORT:-8080}:80
+    volumes:
+      - ./infrastructure/local.caddyfile:/etc/caddy/Caddyfile
