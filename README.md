@@ -31,6 +31,17 @@ Create a EC2 LifecycleManager backup policy that runs hourly during the hackatho
 `cron(0 * 1,2 8 ? 2025)`
 with a retention of 1 day.
 
+# Anubis
+[Anubis](https://github.com/TecharoHQ/anubis) is used to prevent excessive AI crawler traffic.
+
+To not fall behind in the weapons race, we always use the `latest` version.  
+But because forgejo has some custom handling of favicons that leads to problems, we have to supply our own policy file.  
+The ci/cd downloads the most recent default policy and inserts the custom rule every time, hoping it aligns with `latest`
+
+There is a [local version](./infrastructure/local/botPolicies.yaml) that might be out of sync with the most recent Anubis version.  
+In that case follow what the ci/cd does: download the most recent one, and add the favicon rule.  
+
+If the format or name has changed, adjust the pipeline accordingly
 # Forgejo
 ## run locally:
 ```bash

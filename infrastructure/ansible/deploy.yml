@@ -17,5 +17,7 @@
             remote: docker-compose.yml
           - local: ../../.env
             remote: .env
+          - local: ../../botPolicies.yaml
+            remote: botPolicies.yaml
           - local: ../../custom/
             remote: custom
