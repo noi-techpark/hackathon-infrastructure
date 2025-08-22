@@ -137,9 +137,12 @@ jobs:
         uses: noi-techpark/github-actions/env-file@v2
         env:
           X_SERVER_PORT_WEB: 1013
+
           X_DATA_VOLUME: ${{ env.SHARED_VOLUME }}
           X_USER_UID: ${{ env.USER_UID }}
           X_USER_GID: ${{ env.USER_GID }}
+
+          X_ANUBIS_POLICY: ./botPolicies.yaml
           
           # See configuration options: https://forgejo.org/docs/laprod/admin/config-cheat-sheet/
           # See env variable format: https://codeberg.org/forgejo/forgejo/src/branch/forgejo/contrib/environment-to-ini
@@ -201,6 +204,15 @@ jobs:
           X_FORGEJO__mailer__USER: info@hackathon.bz.it
           X_FORGEJO__mailer__PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           X_FORGEJO__mailer__FROM: info@hackathon.bz.it
+
+      # Get fresh default config file from anubis repo (hope no major changes occurred)
+      # Add custom rule object to start of bots: array
+      # 
+      # If this fails, the anubis configuration format has likely changed and you need to adapt the pipeline immediately (some info in README)
+      - name: Customize anubis policies
+        run: |
+          wget https://raw.githubusercontent.com/TecharoHQ/anubis/refs/heads/main/data/botPolicies.yaml
+          yq -i '.bots = [{"name": "Forgejo custom favicon", "path_regex": "^/assets/img/favicon\.(?:png|svg)$", "action": "ALLOW"}] + .bots' botPolicies.yaml
 
       - name: Deploy application
         uses: noi-techpark/github-actions/docker-deploy@v2
