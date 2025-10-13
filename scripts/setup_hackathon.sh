@@ -40,9 +40,9 @@ function api {
 orgname=$SCRIPT_ORGNAME
 org='{
     "username": "'"$orgname"'",
-    "full_name": "NOI Hackathon 2025 summer edition",
-    "description": "Aug 1st-2nd, 2025",
-    "location": "Lido Schenna",
+    "full_name": "NOI Hackathon 2025 SFSCON edition",
+    "description": "Nov 7th-8th, 2025",
+    "location": "NOI Techpark @NOISE",
     "website": "https://hackathon.bz.it",
     "visibility": "public",
     "repo_admin_change_team_access": false
