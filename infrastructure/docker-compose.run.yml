@@ -4,7 +4,7 @@
 #
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:11
+    image: codeberg.org/forgejo/forgejo:12
     container_name: forgejo
     env_file:
       - .env
