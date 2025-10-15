@@ -66,13 +66,32 @@ To create, restore or change the admin user after initial setup, access the dock
 docker exec --user git forgejo forgejo admin user create --admin --username hackathon --email forgejo@hackathon.bz.it --password '******'
 ```
 
-# run hackathon setup script
+# run hackathon scripts
 - create an API token with scopes:
     - admin:read+write 
     - organization:read+write
     - repository:read+write
     - user:read+write
 - customize the `.env` values with prefix `SCRIPT_`
+
+The scripts are usually run in this order:
+
+## (pre event) setup_admins.sh
+Creates the admin users. Only has to be run once, or when users change
+
+## (pre event) setup_organization.sh
+Sets up the hackathon top level organization (and an empty jury team). 
+Run this before the hackathon event, and before the other scripts below
+
+Make sure to set `SCRIPT_ORGNAME` env variable beforehand, and use the same for the following scripts.  
+Then customize the Hackathon details like title and location in the script itself
+
+```bash
+./scripts/setup_organization.sh
+```
+## (event start) setup_teams.sh
+Takes an input csv with all the hackathon participants and their teams.  
+Creates the individual users, repositories and teams.
 
 ```bash
 ./scripts/setup_hackathon.sh input.csv
@@ -81,8 +100,21 @@ passing your input csv file in the same format as `input.example.csv`
 
 Only the team number, name and email columns are used
 
-# gong script
-At gong sound run this script to make all org repos public
+## (event end) gong_open_repos.sh
+At gong sound run this script to make all org repos public.
 ```bash
 ./scripts/gong_open_repos.sh
 ```
+
+## (event end) disarm_teams.sh
+When the hackathon is concluded (typically after all team presentations, but maybe even during the gong - but this should be communicated to teams) remove repo permissions from all teams.
+```bash
+./scripts/disarm_teams.sh
+```
+
+# Pre-hackathon checklist
+- backup volume & upgrade forgejo. They have [upgrade guides](https://forgejo.org/docs/latest/admin/upgrade/)
+- add or remove admin users if team changed
+- create hackathon organization via setup_organization.sh (see above)
+- setup volume backup schedule for during event (see above)
+- prepare .env file for scripts 

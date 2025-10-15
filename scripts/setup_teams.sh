@@ -38,16 +38,6 @@ function api {
 
 # create org
 orgname=$SCRIPT_ORGNAME
-org='{
-    "username": "'"$orgname"'",
-    "full_name": "NOI Hackathon 2025 SFSCON edition",
-    "description": "Nov 7th-8th, 2025",
-    "location": "NOI Techpark @NOISE",
-    "website": "https://hackathon.bz.it",
-    "visibility": "public",
-    "repo_admin_change_team_access": false
-}'
-api POST admin/users/hackathon/orgs "$org"
 
 cat $inputcsv | tail -n +2 | while read line; do
     teamno=$(echo $line | cut -d, -f 5)
@@ -127,25 +117,3 @@ cat $inputcsv | tail -n +2 | while read line; do
     # add user to team
     api PUT teams/$teamid/members/$username
 done
-
-# Create jury team
-juryteam='{
-  "can_create_org_repo": false,
-  "description": "Jury",
-  "includes_all_repositories": true,
-  "name": "Jury",
-  "permission": "read",
-  "units": [
-    "repo.actions",
-    "repo.code",
-    "repo.issues",
-    "repo.ext_issues",
-    "repo.wiki",
-    "repo.ext_wiki",
-    "repo.pulls",
-    "repo.releases",
-    "repo.projects",
-    "repo.ext_wiki"
-  ]
-}'
-api POST orgs/$orgname/teams "$juryteam"
