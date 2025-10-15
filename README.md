@@ -67,7 +67,11 @@ docker exec --user git forgejo forgejo admin user create --admin --username hack
 ```
 
 # run hackathon setup script
-- create an API token with scope admin:read+write and organization:read+write
+- create an API token with scopes:
+    - admin:read+write 
+    - organization:read+write
+    - repository:read+write
+    - user:read+write
 - customize the `.env` values with prefix `SCRIPT_`
 
 ```bash
