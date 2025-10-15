@@ -212,7 +212,7 @@ jobs:
       - name: Customize anubis policies
         run: |
           wget https://raw.githubusercontent.com/TecharoHQ/anubis/refs/heads/main/data/botPolicies.yaml
-          yq -i '.bots = [{"name": "Forgejo custom favicon", "path_regex": "^/assets/img/favicon\.(?:png|svg)$", "action": "ALLOW"}] + .bots' botPolicies.yaml
+          yq -i '.bots = [{"name": "Static assets", "path_regex": "^/assets/.*$", "action": "ALLOW"}] + .bots' botPolicies.yaml
 
       - name: Deploy application
         uses: noi-techpark/github-actions/docker-deploy@v2
