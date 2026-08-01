@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+rundir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source $rundir/../.env
+
+# forgejo instance url
+apihost=$SCRIPT_HOST
+# forgejo api token. must have admin and organization read/write permissions
+apitoken=$SCRIPT_TOKEN
+
+if [ -z "$1" ]; then
+  echo "Missing csv file argument"
+  exit 1
+fi
+inputcsv=$1
+
+# enable API dry run. just echo and don't call anything
+dryrun=$SCRIPT_DRYRUN
+# notify newly created users via mail
+notify=$SCRIPT_NOTIFY_USERS
+
+function api {
+  if [ "$dryrun" == "true" ]; then
+    echo API $1 $2 $3 >&2
+  else
+    curl --silent -X $1 \
+        -H "Authorization: token $apitoken" \
+        -H 'accept: application/json' \
+        -H 'Content-Type: application/json' \
+        $apihost/api/v1/$2 \
+        -d "$3"
+  fi
+}
+
+# create org
+orgname=$SCRIPT_ORGNAME
+
+teamname=Jury
+teamid=$(api GET "orgs/$orgname/teams/search?q=$teamname" | jq '.data[0].id')
+if [ "$teamid" == "null" ]; then
+  echo "Team $teamname has not been found. Run setup_organization.sh first."
+  exit 1
+fi
+
+cat $inputcsv | tail -n +2 | while read line || [ -n "$line" ]; do
+    att_name=$(echo $line | cut -d, -f 1)
+    att_email=$(echo $line | cut -d, -f 2)
+
+    # create user
+    # lowercase, convert umlauts etc., replace spaces with dashes
+    username=$(echo $att_name | tr '[:upper:]' '[:lower:]' | iconv -f utf8 -t ascii//translit | sed -e 's/[^0-9a-z]/-/g')
+    password=$(head -c 16 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')
+    usr=$(jq -n --arg created_at "$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")" \
+          --arg email "$att_email" \
+          --arg full_name "$att_name" \
+          --arg password "$password" \
+          --arg username "$username" \
+          --argjson notify $notify \
+    '{
+      "created_at": $created_at,
+      "email": $email,
+      "full_name": $full_name,
+      "must_change_password": true,
+      "password": $password,
+      "restricted": false,
+      "send_notify": $notify,
+      "source_id": 0,
+      "username": $username,
+      "visibility": "private"
+    }')
+    api POST admin/users "$usr"
+
+    # add user to jury team
+    api PUT teams/$teamid/members/$username
+done

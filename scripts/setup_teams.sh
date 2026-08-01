@@ -39,10 +39,10 @@ function api {
 # create org
 orgname=$SCRIPT_ORGNAME
 
-cat $inputcsv | tail -n +2 | while read line; do
-    teamno=$(echo $line | cut -d, -f 5)
+cat $inputcsv | tail -n +2 | while read line || [ -n "$line" ]; do
     att_name=$(echo $line | cut -d, -f 1)
-    att_email=$(echo $line | cut -d, -f 9)
+    att_email=$(echo $line | cut -d, -f 2)
+    teamno=$(echo $line | cut -d, -f 3)
 
     teamname=team-$teamno
     teamid=$(api GET "orgs/$orgname/teams/search?q=$teamname" | jq '.data[0].id')
