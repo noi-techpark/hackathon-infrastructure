@@ -71,7 +71,7 @@ docker exec --user git forgejo forgejo admin user create --admin --username hack
     - admin:read+write 
     - organization:read+write
     - repository:read+write
-    - user:read+write
+    - user:read
 - customize the `.env` values with prefix `SCRIPT_`
 
 The scripts are usually run in this order:
@@ -98,7 +98,18 @@ Creates the individual users, repositories and teams.
 ```
 passing your input csv file in the same format as `input.example.csv`
 
-Only the team number, name and email columns are used
+The csv needs exactly these columns in this order: attendee name, email, team number (header row is skipped)
+
+Attendees are matched against existing accounts by username (derived from the name) and by email:
+- neither exists: account is created
+- email exists under another username: a notice with the existing username is mailed to that address
+- username exists with another email: a notice is mailed to the CSV address, telling them to contact the hackathon team if they lost access to the old email
+- username and email both exist: a notice with the username and login link is mailed to that address
+- in all cases the existing account is added to the team
+
+A summary of what happened to each attendee (created, notified, errors) is printed at the end and saved to `summary-<org>-<timestamp>.txt` (gitignored).
+
+Notices are only sent if `SCRIPT_NOTIFY_USERS=true`, via the `SCRIPT_SMTP_*` settings. Notified usernames are recorded per edition (`SCRIPT_ORGNAME`) in `.notified-users-<org>` (gitignored) and not mailed again on re-runs; delete a line to notify that user again. With `SCRIPT_DRYRUN=true` they are printed instead.
 
 ## (event end) gong_open_repos.sh
 At gong sound run this script to make all org repos public.
